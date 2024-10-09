@@ -26,7 +26,7 @@ module ParticipantsHelper
   end
 
   def self.define_user(attrs, session, params, home_page)
-    user = User.find_by(name: attrs['name'])
+    user = User.find_by(username: attrs['name'])
     user = create_new_user(attrs, session) if user.nil?
     if !params[:course_id].nil?
       participant = add_user_to_course(params, user)

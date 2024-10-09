@@ -39,17 +39,17 @@ class ParticipantsController < ApplicationController
       #E2351 - add corresponding duty fill from permissions
       can_mentor = permissions[:can_mentor]
       if curr_object.is_a?(Assignment)
-        curr_object.add_participant(params[:user][:name], can_submit, can_review, can_take_quiz, can_mentor)
+        curr_object.add_participant(params[:user][:username], can_submit, can_review, can_take_quiz, can_mentor)
       elsif curr_object.is_a?(Course)
-        curr_object.add_participant(params[:user][:name])
+        curr_object.add_participant(params[:user][:username])
       end
-      user = User.find_by(name: params[:user][:name])
+      user = User.find_by(username: params[:user][:username])
       @model = params[:model]
       @participant = curr_object.participants.find_by(user_id: user.id)
-      flash.now[:note] = "The user <b>#{params[:user][:name]}</b> has successfully been added."
+      flash.now[:note] = "The user <b>#{params[:user][:username]}</b> has successfully been added."
     rescue StandardError
       url_for controller: 'users', action: 'new'
-      flash.now[:error] = "The user <b>#{params[:user][:name]}</b> does not exist or has already been added."
+      flash.now[:error] = "The user <b>#{params[:user][:username]}</b> does not exist or has already been added."
     end
     render action: 'add.js.erb', layout: false
   end
@@ -79,7 +79,7 @@ class ParticipantsController < ApplicationController
     parent_id = participant.parent_id
     begin
       participant.destroy
-      flash[:note] = undo_link("The user \"#{participant.user.name}\" has been successfully removed as a participant.")
+      flash[:note] = undo_link("The user \"#{participant.user.username}\" has been successfully removed as a participant.")
     rescue StandardError
       flash[:error] = 'This participant is on a team, or is assigned as a reviewer for someone’s work.'
     end

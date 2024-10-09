@@ -23,12 +23,12 @@ class SignedUpTeam < ApplicationRecord
 
       participant_names.each do |participant_name|
         if team_name_added
-          names += User.find_by(name: participant_name.u_name).name(ip_address) + ' '
-          participant.user_name_placeholder += User.find_by(name: participant_name.u_name).name(ip_address) + ' '
+          names += User.find_by(username: participant_name.u_name).name(ip_address) + ' '
+          participant.user_name_placeholder += User.find_by(username: participant_name.u_name).name(ip_address) + ' '
         else
-          names = '[' + participant_name.team_name + '] ' + User.find_by(name: participant_name.u_name).name(ip_address) + ' '
+          names = '[' + participant_name.team_name + '] ' + User.find_by(username: participant_name.u_name).name(ip_address) + ' '
           participant.team_name_placeholder = participant_name.team_name
-          participant.user_name_placeholder = User.find_by(name: participant_name.u_name).name(ip_address) + ' '
+          participant.user_name_placeholder = User.find_by(username: participant_name.u_name).name(ip_address) + ' '
           team_name_added = true
         end
       end

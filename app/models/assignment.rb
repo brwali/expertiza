@@ -270,13 +270,13 @@ class Assignment < ApplicationRecord
   # manual addition
   # user_name - the user account name of the participant to add
   def add_participant(user_name, can_submit, can_review, can_take_quiz, can_mentor)
-    user = User.find_by(name: user_name)
+    user = User.find_by(username: user_name)
     if user.nil?
       raise "The user account with the name #{user_name} does not exist. Please <a href='" +
             url_for(controller: 'users', action: 'new') + "'>create</a> the user first."
     end
     participant = AssignmentParticipant.find_by(parent_id: id, user_id: user.id)
-    raise "The user #{user.name} is already a participant." if participant
+    raise "The user #{user.username} is already a participant." if participant
 
     new_part = AssignmentParticipant.create(parent_id: id,
                                             user_id: user.id,

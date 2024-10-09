@@ -61,7 +61,7 @@
 
     <% @student.team.participants.each do |member| %> <!--start team member content-->
         <tr>
-        <td><%= member.user.name(session[:ip]) %></td>
+        <td><%= member.user.username(session[:ip]) %></td>
         <td><%= member.user.fullname(session[:ip]) %></td>
         <%if @student.assignment.duty_based_assignment? %>
             <% team_user = member.team_user %>
@@ -141,7 +141,7 @@
           </tr>
           <% @student.team.participants.each do |member| %> <!--start Pair Programming content-->
             <tr>
-              <td><%= member.user.name(session[:ip]) %></td>
+              <td><%= member.user.username(session[:ip]) %></td>
               <td><%= member.user.fullname(session[:ip]) %></td>
               <td><%= member.user.email(session[:ip]) %></td>
               <% status = TeamsUser.find_by(user_id: member.user.id, team_id: member.team.id).pair_programming_status %>
@@ -245,7 +245,7 @@
         </tr>
         <% @users_on_waiting_list.each do |user|%>
           <tr>
-            <td> &nbsp; <%=user.name(session[:ip])%> &nbsp; </td>
+            <td> &nbsp; <%=user.username(session[:ip])%> &nbsp; </td>
             <td> &nbsp; <%=user.fullname(session[:ip])%> &nbsp; </td>
             <td> &nbsp; <%=user.email(session[:ip])%> &nbsp; </td>
           </tr>

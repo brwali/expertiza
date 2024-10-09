@@ -36,7 +36,7 @@ module ConferenceHelper
   end
 
   def create_author
-    params[:user][:name] = params[:user][:email] unless !params[:user][:name].nil? && !params[:user][:name].empty?
+    params[:user][:username] = params[:user][:email] unless !params[:user][:username].nil? && !params[:user][:username].empty?
     is_author = true
     # Assign all user params for creating author using assign_user_params function
     @user = assign_user_params(is_author)
@@ -53,8 +53,8 @@ module ConferenceHelper
   end
 
   def create_coauthor
-    check = User.find_by(name: params[:user][:name])
-    params[:user][:name] = params[:user][:email] unless check.nil?
+    check = User.find_by(username: params[:user][:username])
+    params[:user][:username] = params[:user][:email] unless check.nil?
     User.skip_callback(:create, :after, :email_welcome)
     is_author = false
     # Assign all user params for creating co-author using assign_user_params function
@@ -90,7 +90,7 @@ module ConferenceHelper
     @user = User.new(user_params)
     # Checks if its a co-author
     if !is_author
-      @user.email = params[:user][:name]
+      @user.email = params[:user][:username]
       # parent_id denotes who created the co-author
       @user.parent_id = session[:user].id
       # co-author role is same as student hence role_id =1

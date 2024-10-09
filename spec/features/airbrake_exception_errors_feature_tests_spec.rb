@@ -40,7 +40,7 @@ describe 'Airbrake exception errors' do
     assignment = Assignment.first
     assignment.update_attributes(require_quiz: true)
     login_as 'student2064'
-    user_id = User.find_by(name: 'student2064').id
+    user_id = User.find_by(username: 'student2064').id
     participant_id = Participant.where(user_id: user_id).first.id
     visit '/student_task/list'
     click_link 'TestAssignment'

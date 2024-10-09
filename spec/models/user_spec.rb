@@ -8,11 +8,11 @@ describe User do
 
   describe '#name' do
     it 'returns the name of the user' do
-      expect(user.name).to eq('abc')
+      expect(user.username).to eq('abc')
     end
     it 'Validate presence of name which cannot be blank' do
       expect(user).to be_valid
-      user.name = '  '
+      user.username = '  '
       expect(user).not_to be_valid
     end
     it 'Validate that name is always unique' do
@@ -20,7 +20,7 @@ describe User do
     end
     it 'Validate that the name does not contain white spaces' do
       expect(user).to be_valid
-      user.name = 'abc def'
+      user.username = 'abc def'
       expect(user).not_to be_valid
     end
   end
@@ -93,7 +93,7 @@ describe User do
       allow(user2).to receive(:role).and_return('Student')
       expect(user.role.get_parents).to eq(['Student'])
       allow(User).to receive(:all).with(conditions: ['name LIKE ?', 'abc%'], limit: 20).and_return([user1, user2])
-      expect(user.get_available_users(user.name)).to eq([user1, user2])
+      expect(user.get_available_users(user.username)).to eq([user1, user2])
     end
   end
 
@@ -216,7 +216,7 @@ describe User do
       row = { username: 'abc', fullname: 'test, test', email: 'test@gmail.com' }
       allow(user).to receive(:id).and_return(6)
       User.import(row, nil, { user: user }, nil)
-      updated_user = User.find_by(name: 'abc')
+      updated_user = User.find_by(username: 'abc')
       expect(updated_user.email).to eq 'test@gmail.com'
       expect(updated_user.fullname).to eq 'test, test'
       expect(updated_user.parent_id).to eq 6

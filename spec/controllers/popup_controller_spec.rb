@@ -131,7 +131,7 @@ describe PopupController do
       get :reviewer_details_popup, params: request_params, session: user_session
       expect(@response).to have_http_status(200)
       expect(user.fullname).to eq('Test User')
-      expect(user.name).to eq('Test')
+      expect(user.username).to eq('Test')
       expect(user.email).to eq('test@gmail.com')
       expect(user.handle).to eq(1)
     end

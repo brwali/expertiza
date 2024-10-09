@@ -78,7 +78,7 @@ class Team < ApplicationRecord
 
   # Add member to the team, changed to hash by E1776
   def add_member(user, _assignment_id = nil)
-    raise "The user #{user.name} is already a member of the team #{name}" if user?(user)
+    raise "The user #{user.username} is already a member of the team #{name}" if user?(user)
 
     can_add_member = false
     unless full?
@@ -87,7 +87,7 @@ class Team < ApplicationRecord
       parent = TeamNode.find_by(node_object_id: id)
       TeamUserNode.create(parent_id: parent.id, node_object_id: t_user.id)
       add_participant(parent_id, user)
-      ExpertizaLogger.info LoggerMessage.new('Model:Team', user.name, "Added member to the team #{id}")
+      ExpertizaLogger.info LoggerMessage.new('Model:Team', user.username, "Added member to the team #{id}")
     end
     can_add_member
   end
@@ -191,7 +191,7 @@ class Team < ApplicationRecord
   # Extract team members from the csv and push to DB,  changed to hash by E1776
   def import_team_members(row_hash)
     row_hash[:teammembers].each_with_index do |teammate, _index|
-      user = User.find_by(name: teammate.to_s)
+      user = User.find_by(username: teammate.to_s)
       if user.nil?
         raise ImportError, "The user '#{teammate}' was not found. <a href='/users/new'>Create</a> this user?"
       else
@@ -260,7 +260,7 @@ class Team < ApplicationRecord
       if options[:team_name] == 'false'
         team_members = TeamsUser.where(team_id: team.id)
         team_members.each do |user|
-          output.push(user.name)
+          output.push(user.username)
         end
       end
       csv << output

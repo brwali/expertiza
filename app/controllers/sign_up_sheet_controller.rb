@@ -243,7 +243,7 @@ class SignUpSheetController < ApplicationController
   def signup_as_instructor; end
 
   def signup_as_instructor_action
-    user = User.find_by(name: params[:username])
+    user = User.find_by(username: params[:username])
     if user.nil? # validate invalid user
       flash[:error] = 'That student does not exist!'
     else

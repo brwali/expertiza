@@ -44,7 +44,7 @@ describe "check 'Begin review' showing up before due date and 'Assign grade' aft
     expect(page).to have_content(student_test.name)
     expect(page).to have_content(student_test.email)
 
-    user_id = User.find_by(name: 'student6666').id
+    user_id = User.find_by(username: 'student6666').id
     participant_student = Participant.where(user_id: user_id)
     participant_id = participant_student.first.id
     parent_id = participant_student.first.parent_id
@@ -117,7 +117,7 @@ describe "check 'Begin review' showing up before due date and 'Assign grade' aft
     expect(page).to have_content(student_test.name)
     expect(page).to have_content(student_test.email)
 
-    user_id = User.find_by(name: 'student6666').id
+    user_id = User.find_by(username: 'student6666').id
     participant_student = Participant.where(user_id: user_id)
     participant_id = participant_student.first.id
     parent_id = participant_student.first.parent_id

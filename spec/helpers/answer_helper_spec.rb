@@ -31,8 +31,8 @@ describe AnswerHelper do
     context 'when the response is in reviewing period' do
       it 'deletes the answers' do
         allow(AnswerHelper).to receive(:log_answer_responses).with([@question.id], @questionnaire2.id).and_return([@answer.response_id])
-        allow(AnswerHelper).to receive(:log_response_info).with([@answer.response_id]).and_return(@answer.response_id => { email: @user.email, answers: @answer.comments, name: @user.name, assignment_name: @assignment1.name })
-        expect(AnswerHelper).to receive(:review_mailer).with(@user.email, @answer.comments, @user.name, @assignment1.name).and_return(true)
+        allow(AnswerHelper).to receive(:log_response_info).with([@answer.response_id]).and_return(@answer.response_id => { email: @user.email, answers: @answer.comments, name: @user.username, assignment_name: @assignment1.name })
+        expect(AnswerHelper).to receive(:review_mailer).with(@user.email, @answer.comments, @user.username, @assignment1.name).and_return(true)
         expect(Answer.exists?(response_id: @answer.response_id)).to eql(true) # verify the answer exists before deleting
         AnswerHelper.delete_existing_responses([@question.id], @questionnaire2.id)
         expect(Answer.exists?(response_id: @answer.response_id)).to eql(false)
@@ -60,14 +60,14 @@ describe AnswerHelper do
         to: @user.email,
         subject: 'Expertiza Notification: The review rubric has been changed, please re-attempt the review',
         body: {
-          name: @user.name,
+          name: @user.username,
           assignment_name: @assignment1.name,
           answers: @answer.comments
         }
       ).and_return(@mail)
       allow(@mail).to receive(:deliver_now)
       expect(Mailer).to receive(:notify_review_rubric_change).once
-      AnswerHelper.review_mailer(@user.email, @answer.comments, @user.name, @assignment1.name)
+      AnswerHelper.review_mailer(@user.email, @answer.comments, @user.username, @assignment1.name)
     end
   end
 

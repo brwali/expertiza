@@ -54,27 +54,27 @@ describe 'review mapping' do
 
     # add_reviewer
     first(:link, 'add reviewer').click
-    add_reviewer(participant_reviewer.user.name)
-    expect(page).to have_content participant_reviewer.user.name
+    add_reviewer(participant_reviewer.user.username)
+    expect(page).to have_content participant_reviewer.user.username
     click_link('delete')
-    expect(page).to have_content "The review mapping for \"#{@team1.name}\" and \"#{participant_reviewer.user.name}\" has been deleted"
+    expect(page).to have_content "The review mapping for \"#{@team1.name}\" and \"#{participant_reviewer.user.username}\" has been deleted"
 
     # add_meta_reviewer
     first(:link, 'add reviewer').click
-    add_reviewer(participant_reviewer.user.name)
+    add_reviewer(participant_reviewer.user.username)
     click_link('add metareviewer')
-    add_matareviewer(participant_reviewer2.user.name)
-    expect(page).to have_content participant_reviewer2.user.name
+    add_matareviewer(participant_reviewer2.user.username)
+    expect(page).to have_content participant_reviewer2.user.username
 
     # delete_meta_reviewer
     find(:xpath, "//a[@href='/review_mapping/delete_metareviewer?id=3']").click
-    expect(page).to have_content "The metareview mapping for #{participant_reviewer.user.name} and #{participant_reviewer2.user.name} has been deleted"
+    expect(page).to have_content "The metareview mapping for #{participant_reviewer.user.username} and #{participant_reviewer2.user.username} has been deleted"
 
     click_link('add metareviewer')
-    add_matareviewer(participant_reviewer2.user.name)
+    add_matareviewer(participant_reviewer2.user.username)
     # delete_all_meta_reviewer
     click_link('delete all metareviewers')
-    expect(page).to have_content "metareview mappings for contributor \"#{@team1.name}\" and reviewer \"#{participant_reviewer.user.name}\" have been deleted"
+    expect(page).to have_content "metareview mappings for contributor \"#{@team1.name}\" and reviewer \"#{participant_reviewer.user.username}\" have been deleted"
 
     first(:link, 'delete outstanding reviewers').click
     expect(page).to have_content "All review mappings for \"#{@team1.name}\" have been deleted"
@@ -112,8 +112,8 @@ describe 'review mapping' do
     login_and_assign_reviewer('instructor6', @assignment.id, 0, 2)
     # add_reviewer
     first(:link, 'add reviewer').click
-    add_reviewer(participant_reviewer.user.name)
-    expect(page).to have_content participant_reviewer.user.name
+    add_reviewer(participant_reviewer.user.username)
+    expect(page).to have_content participant_reviewer.user.username
 
     # create new submitted review
     team = AssignmentTeam.find(1)
