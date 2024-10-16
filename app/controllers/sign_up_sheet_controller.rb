@@ -414,7 +414,7 @@ class SignUpSheetController < ApplicationController
       @results.each do |result|
         @team_members = ''
         TeamsUser.where(team_id: result[:team_id]).each do |teamuser|
-          @team_members += User.find(teamuser.user_id).name + ' '
+          @team_members += User.find(teamuser.user_id).username + ' '
         end
       end
       # @team_members = find_team_members(topic)

@@ -42,8 +42,8 @@ class UsersController < ApplicationController
   def auto_complete_for_user_name
     user = session[:user]
     role = Role.find(user.role_id)
-    @users = User.where('name LIKE ? and (role_id in (?) or id = ?)', "#{params[:user][:username]}%", role.get_available_roles, user.id)
-    render inline: "<%= auto_complete_result @users, 'name' %>", layout: false
+    @users = User.where('username LIKE ? and (role_id in (?) or id = ?)', "#{params[:user][:username]}%", role.get_available_roles, user.id)
+    render inline: "<%= auto_complete_result @users, 'username' %>", layout: false
   end
 
   # for anonymized view for demo purposes
@@ -165,7 +165,7 @@ class UsersController < ApplicationController
     # update username, when the user cannot be deleted
     # rename occurs in 'show' page, not in 'edit' page
     # eg. /users/5408?name=5408
-    @user.username += '_hidden' if request.original_fullpath == "/users/#{@user.id}?name=#{@user.id}"
+    @user.username += '_hidden' if request.original_fullpath == "/users/#{@user.id}?username=#{@user.id}"
 
     if @user.update_attributes(params[:user])
       flash[:success] = "The user \"#{@user.username}\" has been successfully updated."
@@ -214,7 +214,7 @@ class UsersController < ApplicationController
 
   # add user etc_icons_on_homepage
   def user_params
-    params.require(:user).permit(:name,
+    params.require(:user).permit(:username,
                                  :crypted_password,
                                  :role_id,
                                  :password_salt,

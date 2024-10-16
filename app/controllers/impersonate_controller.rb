@@ -59,7 +59,7 @@ class ImpersonateController < ApplicationController
       user = real_user(params[:user][:username])
       session[:super_user] = session[:user] if session[:super_user].nil?
       generate_session(user)
-    elsif !params[:impersonate][:name].empty?
+    elsif !params[:impersonate][:username].empty?
       user = real_user(params[:impersonate][:username])
       generate_session(user)
     else
@@ -78,7 +78,7 @@ class ImpersonateController < ApplicationController
     if params[:user] && warn_for_special_chars(params[:user][:username], 'Username')
       flash[:error] = 'Please enter valid user name'
       redirect_back fallback_location: root_path
-    elsif params[:impersonate] && warn_for_special_chars(params[:impersonate][:name], 'Username')
+    elsif params[:impersonate] && warn_for_special_chars(params[:impersonate][:username], 'Username')
       flash[:error] = 'Please enter valid user name'
       redirect_back fallback_location: root_path
     end
@@ -101,7 +101,7 @@ class ImpersonateController < ApplicationController
         overwrite_session
       end
     else
-      unless params[:impersonate][:name].empty?
+      unless params[:impersonate][:username].empty?
         overwrite_session
       end
     end
@@ -119,10 +119,10 @@ class ImpersonateController < ApplicationController
         @message = 'User name cannot be empty' if params[:user][:username].empty?
         user = real_user(params[:user][:username])
         check_if_user_impersonateable if user
-      elsif !params[:impersonate][:name].empty?
+      elsif !params[:impersonate][:username].empty?
         # Impersonate a new account
-        @message = "You cannot impersonate '#{params[:impersonate][:name]}'."
-        user = real_user(params[:impersonate][:name])
+        @message = "You cannot impersonate '#{params[:impersonate][:username]}'."
+        user = real_user(params[:impersonate][:username])
         check_if_user_impersonateable if user
       # Revert to original account when currently in the impersonated session
       elsif !session[:super_user].nil?
@@ -143,11 +143,11 @@ class ImpersonateController < ApplicationController
 
   # This method checks if the user is in anonymized view and accordingly returns the user object associated with the parameter
 
-  def real_user(name)
+  def real_user(username)
     if User.anonymized_view?(session[:ip])
-      user = User.real_user_from_anonymized_name(name)
+      user = User.real_user_from_anonymized_name(username)
     else
-      user = User.find_by(username: name)
+      user = User.find_by(username: username)
     end
     return user
   end

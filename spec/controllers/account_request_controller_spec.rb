@@ -118,7 +118,7 @@ describe AccountRequestController do
   context '#create_requested_user_record' do
     request_params = {
       requested_user: { self_introduction: 'I am good' },
-      user: { name: 'instructor6',
+      user: { username: 'instructor6',
               role_id: 2,
               fullname: '6, instructor',
               institution_id: 1,
@@ -131,7 +131,7 @@ describe AccountRequestController do
     end
 
     it 'if user exists' do
-      allow(User).to receive(:find_by).with(name: 'instructor6').and_return(instructor)
+      allow(User).to receive(:find_by).with(username: 'instructor6').and_return(instructor)
 
       post :create_requested_user_record, params: request_params
       expect(flash[:error]).to eq 'The account you are requesting already exists in Expertiza.'

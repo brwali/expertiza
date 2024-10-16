@@ -1,7 +1,7 @@
 describe SubmittedContentController do
   let(:admin) { build(:admin, id: 3) }
   let(:super_admin) { build(:superadmin, id: 1, role_id: 5) }
-  let(:instructor1) { build(:instructor, id: 10, role_id: 3, parent_id: 3, name: 'Instructor1') }
+  let(:instructor1) { build(:instructor, id: 10, role_id: 3, parent_id: 3, username: 'Instructor1') }
   let(:student1) { build(:student, id: 21, role_id: 1) }
   let(:team) { build(:assignment_team, id: 1) }
   let(:participant) { build(:participant, id: 1, user_id: 21) }
@@ -58,7 +58,7 @@ describe SubmittedContentController do
         allow(AssignmentParticipant).to receive(:find).and_return(participant)
         stub_current_user(student1, student1.role.name, student1.role)
         allow(participant).to receive(:team).and_return(team)
-        allow(participant).to receive(:name).and_return('Name')
+        allow(participant).to receive(:username).and_return('Name')
       end
       it 'flashes error if a duplicate hyperlink is submitted' do
         allow(team).to receive(:hyperlinks).and_return(['google.com'])
@@ -286,7 +286,7 @@ describe SubmittedContentController do
     it 'student#view it' do
       allow(AssignmentParticipant).to receive(:find).and_return(participant)
       stub_current_user(student1, student1.role.name, student1.role)
-      allow(participant).to receive(:name).and_return('Name')
+      allow(participant).to receive(:username).and_return('Name')
       params = { id: 21 }
       response = get :view, params: params
       expect(response).to redirect_to(action: :edit, view: true, id: 21)
@@ -300,7 +300,7 @@ describe SubmittedContentController do
     it 'instructor#view it' do
       allow(AssignmentParticipant).to receive(:find).and_return(participant)
       stub_current_user(instructor1, instructor1.role.name, instructor1.role)
-      allow(participant).to receive(:name).and_return('Name')
+      allow(participant).to receive(:username).and_return('Name')
       params = { id: 21 }
       response = get :view, params: params
       expect(response).to redirect_to(action: :edit, view: true, id: 21)
@@ -314,7 +314,7 @@ describe SubmittedContentController do
     it 'superadmin#view it' do
       allow(AssignmentParticipant).to receive(:find).and_return(participant)
       stub_current_user(superadmin1, superadmin1.role.name, superadmin1.role)
-      allow(participant).to receive(:name).and_return('Name')
+      allow(participant).to receive(:username).and_return('Name')
       params = { id: 21 }
       response = get :view, params: params
       expect(response).to redirect_to(action: :edit, view: true, id: 21)
@@ -330,7 +330,7 @@ describe SubmittedContentController do
       allow(Participant).to receive(:find_by).and_return(participant)
       allow(User).to receive(:find).and_return(participant)
       stub_current_user(student1, student1.role.name, student1.role)
-      allow(participant).to receive(:name).and_return('Name')
+      allow(participant).to receive(:username).and_return('Name')
       params = { id: 21 }
       response = get :edit, params: params
       expect(response).to render_template(:edit)
@@ -346,7 +346,7 @@ describe SubmittedContentController do
       allow(Participant).to receive(:find_by).and_return(participant)
       allow(User).to receive(:find).and_return(participant)
       stub_current_user(instructor1, instructor1.role.name, instructor1.role)
-      allow(participant).to receive(:name).and_return('Name')
+      allow(participant).to receive(:username).and_return('Name')
       params = { id: 21 }
       response = get :edit, params: params
       expect(response).to render_template(:edit)
@@ -362,7 +362,7 @@ describe SubmittedContentController do
       allow(Participant).to receive(:find_by).and_return(participant)
       allow(User).to receive(:find).and_return(participant)
       stub_current_user(superadmin1, superadmin1.role.name, superadmin1.role)
-      allow(participant).to receive(:name).and_return('Name')
+      allow(participant).to receive(:username).and_return('Name')
       params = { id: 21 }
       response = get :edit, params: params
       expect(response).to render_template(:edit)

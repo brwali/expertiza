@@ -272,7 +272,7 @@ class Assignment < ApplicationRecord
   def add_participant(user_name, can_submit, can_review, can_take_quiz, can_mentor)
     user = User.find_by(username: user_name)
     if user.nil?
-      raise "The user account with the name #{user_name} does not exist. Please <a href='" +
+      raise "The user account with the username #{user_name} does not exist. Please <a href='" +
             url_for(controller: 'users', action: 'new') + "'>create</a> the user first."
     end
     participant = AssignmentParticipant.find_by(parent_id: id, user_id: user.id)

@@ -66,7 +66,7 @@ module ConferenceHelper
       # password is regenerated so that we could provide it in a mail
       password = @user.reset_password
       # Mail to be sent to co-author once the user has been created. New partial is used as content for email is different from normal user
-      MailerHelper.send_mail_for_conference_user(@user, 'Your Expertiza account has been created.', 'user_conference_invitation', password, current_user.name).deliver
+      MailerHelper.send_mail_for_conference_user(@user, 'Your Expertiza account has been created.', 'user_conference_invitation', password, current_user.username).deliver
       @user
     end
   end

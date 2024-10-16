@@ -204,7 +204,7 @@ class ParticipantsController < ApplicationController
   # Get the user info from the team user
   def get_user_info(team_user, assignment)
     user = {}
-    user[:name] = team_user.name
+    user[:username] = team_user.name
     user[:fullname] = team_user.fullname
     # set by default
     permission_granted = false

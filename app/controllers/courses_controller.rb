@@ -151,7 +151,7 @@ class CoursesController < ApplicationController
     @ta_mapping.destroy
 
     @course = @ta_mapping
-    undo_link("The TA \"#{@ta.name}\" has been successfully removed.")
+    undo_link("The TA \"#{@ta.username}\" has been successfully removed.")
 
     render action: 'remove_ta.js.erb', layout: false
   end

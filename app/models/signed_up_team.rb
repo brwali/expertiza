@@ -15,7 +15,7 @@ class SignedUpTeam < ApplicationRecord
     @participants.each_with_index do |participant, i|
       participant_names = User.joins('INNER JOIN teams_users ON users.id = teams_users.user_id')
                               .joins('INNER JOIN teams ON teams.id = teams_users.team_id')
-                              .select('users.name as u_name, teams.name as team_name')
+                              .select('users.username as u_name, teams.name as team_name')
                               .where('teams.id = ?', participant.team_id)
 
       team_name_added = false

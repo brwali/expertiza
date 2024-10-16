@@ -13,7 +13,7 @@ class TeamsUsersController < ApplicationController
   def auto_complete_for_user_name
     team = Team.find(session[:team_id])
     @users = team.get_possible_team_members(params[:user][:username])
-    render inline: "<%= auto_complete_result @users, 'name' %>", layout: false
+    render inline: "<%= auto_complete_result @users, 'username' %>", layout: false
   end
 
   # Example of duties: manager, designer, programmer, tester. Finds TeamsUser and save preferred Duty
