@@ -43,11 +43,11 @@ describe InvitationsController do
 
   describe '#check_user_before_invitation' do
     it 'invitation added for existing user' do
-      allow(User).to receive(:find_by).with(name: 'student@gmail.com').and_return(student)
+      allow(User).to receive(:find_by).with(username: 'student@gmail.com').and_return(student)
       allow(AssignmentParticipant).to receive(:find).with('1').and_return(participant)
       allow(Assignment).to receive(:find).with(1).and_return(assignment)
       request_params = {
-        user: { name: 'student@gmail.com', email: 'student@gmail.com' },
+        user: { username: 'student@gmail.com', email: 'student@gmail.com' },
         student_id: 1
       }
       user_session = { user: student }
@@ -58,7 +58,7 @@ describe InvitationsController do
     it 'invitation added for new user who does not have an expertiza account yet and sends an invitation' do
       allow(User).to receive(:skip_callback).with(:create, :after, :email_welcome).and_return(true)
       request_params = {
-        user: { name: 'testuser@gmail.com',
+        user: { username: 'testuser@gmail.com',
                 fullname: 'John Bumgardner',
                 parent_id: 1,
                 institution_id: 1 },
@@ -76,7 +76,7 @@ describe InvitationsController do
     it 'invitation not added for new user if entered email has incorrect format' do
       allow(User).to receive(:skip_callback).with(:create, :after, :email_welcome).and_return(true)
       request_params = {
-        user: { name: 'testuser',
+        user: { username: 'testuser',
                 parent_id: 1,
                 institution_id: 1 },
         student_id: 1,
@@ -92,7 +92,7 @@ describe InvitationsController do
 
     it 'invitation and user not added for new user with normal assignment' do
       request_params = {
-        user: { name: 'testuser@gmail.com',
+        user: { username: 'testuser@gmail.com',
                 email: 'testuser@gmail.com' },
         student_id: 1,
         team_id: 1

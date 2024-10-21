@@ -1,8 +1,8 @@
 describe SubmissionRecordsController do
   # initialize objects using factories.rb required for stubbing in test cases
   let(:super_admin) { build(:superadmin, id: 1) }
-  let(:instructor1) { build(:instructor, id: 10, name: 'Instructor1') }
-  let(:instructor2) { build(:instructor, id: 11, name: 'Instructor2') }
+  let(:instructor1) { build(:instructor, id: 10, username: 'Instructor1') }
+  let(:instructor2) { build(:instructor, id: 11, username: 'Instructor2') }
   let(:ta) { build(:teaching_assistant, id: 8) }
 
   let(:assignment) { build(:assignment, id: 1, name: 'Test Assgt', rounds_of_reviews: 2, instructor_id: 10) }

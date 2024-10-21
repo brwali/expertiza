@@ -61,7 +61,7 @@ class AccountRequestController < ApplicationController
   # Creates a new user if their request is approved
   def user_new(requested_user)
     new_user = User.new
-    new_user.name = requested_user.name
+    new_user.username = requested_user.name
     new_user.role_id = requested_user.role_id
     new_user.institution_id = requested_user.institution_id
     new_user.fullname = requested_user.fullname
@@ -108,7 +108,7 @@ class AccountRequestController < ApplicationController
   def create_requested_user_record
     requested_user = AccountRequest.new(requested_user_params)
     # An object is created with respect to AccountRequest model inorder to populate the users information when account is requested
-    (user_exists = User.find_by(name: requested_user.name)) || User.find_by(name: requested_user.email)
+    (user_exists = User.find_by(username: requested_user.name)) || User.find_by(username: requested_user.email)
     requested_user_saved = save_requested_user(requested_user, params)
     # Stores a boolean value with respect to whether the user data is saved or not
     if !user_exists && requested_user_saved

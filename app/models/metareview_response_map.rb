@@ -41,12 +41,12 @@ class MetareviewResponseMap < ResponseMap
 
   def self.export(csv, parent_id, _options)
     mappings = Assignment.find(parent_id).metareview_mappings
-    mappings = mappings.sort_by { |a| [a.review_mapping.reviewee.name, a.reviewee.name, a.reviewer.name] }
+    mappings = mappings.sort_by { |a| [a.review_mapping.reviewee.username, a.reviewee.username, a.reviewer.username] }
     mappings.each do |map|
       csv << [
-        map.review_mapping.reviewee.name,
-        map.reviewee.name,
-        map.reviewer.name
+        map.review_mapping.reviewee.username,
+        map.reviewee.username,
+        map.reviewer.username
       ]
     end
   end

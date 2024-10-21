@@ -20,10 +20,10 @@ describe "check 'Begin review' showing up before due date and 'Assign grade' aft
 
     expect(assignment_test.instructor_id).to eql(instructor6.id)
     expect(assignment_test.course_id).to eql(nil)
-    student_test = create(:student, name: 'student6666', email: 'stu6666@ncsu.edu') # create a student for test
+    student_test = create(:student, username: 'student6666', email: 'stu6666@ncsu.edu') # create a student for test
 
     visit(root_path)
-    fill_in('login_name', with: 'instructor6')
+    fill_in('login_username', with: 'instructor6')
     fill_in('login_password', with: 'password')
     click_button('Sign in')
     expect(current_path).to eql('/tree_display/list')
@@ -44,7 +44,7 @@ describe "check 'Begin review' showing up before due date and 'Assign grade' aft
     expect(page).to have_content(student_test.name)
     expect(page).to have_content(student_test.email)
 
-    user_id = User.find_by(name: 'student6666').id
+    user_id = User.find_by(username: 'student6666').id
     participant_student = Participant.where(user_id: user_id)
     participant_id = participant_student.first.id
     parent_id = participant_student.first.parent_id
@@ -93,10 +93,10 @@ describe "check 'Begin review' showing up before due date and 'Assign grade' aft
 
     expect(assignment_test.instructor_id).to eql(instructor6.id)
     expect(assignment_test.course_id).to eql(nil)
-    student_test = create(:student, name: 'student6666', email: 'stu6666@ncsu.edu') # create a student for test
+    student_test = create(:student, username: 'student6666', email: 'stu6666@ncsu.edu') # create a student for test
 
     visit(root_path)
-    fill_in('login_name', with: 'instructor6')
+    fill_in('login_username', with: 'instructor6')
     fill_in('login_password', with: 'password')
     click_button('Sign in')
     expect(current_path).to eql('/tree_display/list')
@@ -117,7 +117,7 @@ describe "check 'Begin review' showing up before due date and 'Assign grade' aft
     expect(page).to have_content(student_test.name)
     expect(page).to have_content(student_test.email)
 
-    user_id = User.find_by(name: 'student6666').id
+    user_id = User.find_by(username: 'student6666').id
     participant_student = Participant.where(user_id: user_id)
     participant_id = participant_student.first.id
     parent_id = participant_student.first.parent_id

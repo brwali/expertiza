@@ -270,13 +270,13 @@ class Assignment < ApplicationRecord
   # manual addition
   # user_name - the user account name of the participant to add
   def add_participant(user_name, can_submit, can_review, can_take_quiz, can_mentor)
-    user = User.find_by(name: user_name)
+    user = User.find_by(username: user_name)
     if user.nil?
-      raise "The user account with the name #{user_name} does not exist. Please <a href='" +
+      raise "The user account with the username #{user_name} does not exist. Please <a href='" +
             url_for(controller: 'users', action: 'new') + "'>create</a> the user first."
     end
     participant = AssignmentParticipant.find_by(parent_id: id, user_id: user.id)
-    raise "The user #{user.name} is already a participant." if participant
+    raise "The user #{user.username} is already a participant." if participant
 
     new_part = AssignmentParticipant.create(parent_id: id,
                                             user_id: user.id,
@@ -443,8 +443,8 @@ class Assignment < ApplicationRecord
     @reviewee = Participant.find(map.reviewee_id).user if @reviewee.nil?
     reviewer = Participant.find(map.reviewer_id).user
     teams_csv << handle_nil(@reviewee.id) if detail_options['team_id'] == 'true'
-    teams_csv << handle_nil(@reviewee.name) if detail_options['team_name'] == 'true'
-    teams_csv << handle_nil(reviewer.name) if detail_options['reviewer'] == 'true'
+    teams_csv << handle_nil(@reviewee.username) if detail_options['team_name'] == 'true'
+    teams_csv << handle_nil(reviewer.username) if detail_options['reviewer'] == 'true'
     teams_csv << handle_nil(answer.question.txt) if detail_options['question'] == 'true'
     teams_csv << handle_nil(answer.question.id) if detail_options['question_id'] == 'true'
     teams_csv << handle_nil(answer.id) if detail_options['comment_id'] == 'true'

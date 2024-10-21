@@ -34,7 +34,7 @@ class AuthController < ApplicationController
   def after_login(user)
     session[:user] = user
     session[:impersonate] = false
-    ExpertizaLogger.info LoggerMessage.new('', user.name, 'Login successful')
+    ExpertizaLogger.info LoggerMessage.new('', user.username, 'Login successful')
     AuthController.set_current_role(user.role_id, session)
     redirect_to controller: AuthHelper.get_home_controller(session[:user]),
                 action: AuthHelper.get_home_action(session[:user])
