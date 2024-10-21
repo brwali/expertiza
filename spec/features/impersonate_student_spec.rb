@@ -19,18 +19,18 @@ describe 'Impersonate a student whose assignment has no course attribute' do
     # 3. assign the assignment without course to the test student
     visit("/participants/list?id=#{assignment_test.id}&model=Assignment")
     expect(page).to have_content('E1968')
-    fill_in('user_name', match: :first, with: student_test.name)
+    fill_in('user_name', match: :first, with: student_test.username)
     click_button('Add', match: :first)
-    expect(page).to have_content(student_test.name)
+    expect(page).to have_content(student_test.username)
     expect(page).to have_content(student_test.email)
 
     # 3. impersonate the student with the assignment which is not subject to any course
     visit('/impersonate/start')
     expect(page).to have_content('Enter user account')
-    fill_in('user_name', with: student_test.name)
+    fill_in('user_name', with: student_test.username)
     click_button('Impersonate')
     expect(current_path).to eql('/student_task/list')
-    expect(page).to have_content("User: #{student_test.name}")
+    expect(page).to have_content("User: #{student_test.username}")
     expect(page).to have_content('E1968')
   end
 end

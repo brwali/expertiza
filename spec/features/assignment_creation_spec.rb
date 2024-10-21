@@ -670,7 +670,7 @@ describe 'assignment function' do
 
     it 'should display newly created assignment' do
       participant = create(:participant)
-      login_as(participant.username)
+      login_as(participant.name)
       expect(page).to have_content('participants Assignment')
     end
   end

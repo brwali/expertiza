@@ -19,7 +19,7 @@
         <table>
           <th>name</th>
           <% participants_without_team.each_with_index do |participant, index| %>
-            <tr class=<%= index.odd? ? 'odd' : 'even' %>><td><%= participant.username(session[:ip]) %></td></tr>
+            <tr class=<%= index.odd? ? 'odd' : 'even' %>><td><%= participant.name(session[:ip]) %></td></tr>
           <% end %>
         </table>
       </div>

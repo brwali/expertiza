@@ -133,7 +133,7 @@
                 end %>
 
               <tr style="background-color:<%=bgcolor3%>">
-                <td><%= rmap.reviewer.username(session[:ip]) %> (<%= rmap.reviewer.fullname(session[:ip]) %>)
+                <td><%= rmap.reviewer.name(session[:ip]) %> (<%= rmap.reviewer.fullname(session[:ip]) %>)
                   <div style="text-align:right">
                     <%= link_to 'delete', :action => 'delete_metareviewer', :id => rmap.map_id %><br/>
                   </div>

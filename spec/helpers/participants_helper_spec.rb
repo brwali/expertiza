@@ -23,7 +23,7 @@ describe ParticipantsHelper do
     describe '#create_new_user' do
         context 'when create_new_user is called' do
             #Checking if a user has een correctly created
-            let(:instructor1) { build(:instructor, id: 10, role_id: 3, parent_id: 3, name: 'Instructor1') }
+            let(:instructor1) { build(:instructor, id: 10, role_id: 3, parent_id: 3, username: 'Instructor1') }
             
             it 'returns correct user when create_new_user is called' do
                 attributes = {'role_id' => 1, 'username' => 'Test1', 'fullname' => 'test2', 'email' => 'test@ncsu.edu', 'email_on_submission' => 1, 'email_on_review' => 1, 'email_on_review_of_review' => 1}

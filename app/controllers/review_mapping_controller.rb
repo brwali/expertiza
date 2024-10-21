@@ -77,7 +77,7 @@ class ReviewMappingController < ApplicationController
         if ReviewResponseMap.where(reviewee_id: params[:contributor_id], reviewer_id: reviewer.id).first.nil?
           ReviewResponseMap.create(reviewee_id: params[:contributor_id], reviewer_id: reviewer.id, reviewed_object_id: assignment.id)
         else
-          raise 'The reviewer, "' + reviewer.username + '", is already assigned to this contributor.'
+          raise 'The reviewer, "' + reviewer.name + '", is already assigned to this contributor.'
         end
       rescue StandardError => e
         msg = e.message
@@ -269,7 +269,7 @@ class ReviewMappingController < ApplicationController
                       'Delete these mappings anyway?' \
                       "&nbsp;<a href='#{url_yes}'>Yes</a>&nbsp;|&nbsp;<a href='#{url_no}'>No</a><br/>"
     else
-      flash[:note] = 'All metareview mappings for contributor "' + mapping.reviewee.username + '" and reviewer "' + mapping.reviewer.username + '" have been deleted.'
+      flash[:note] = 'All metareview mappings for contributor "' + mapping.reviewee.username + '" and reviewer "' + mapping.reviewer.name + '" have been deleted.'
     end
     redirect_to action: 'list_mappings', id: mapping.assignment.id
   end
@@ -293,7 +293,7 @@ class ReviewMappingController < ApplicationController
     review_response_map = ReviewResponseMap.find_by(id: params[:id])
     if review_response_map && !Response.exists?(map_id: review_response_map.id)
       review_response_map.destroy
-      flash[:success] = 'The review mapping for "' + review_response_map.reviewee.username + '" and "' + review_response_map.reviewer.username + '" has been deleted.'
+      flash[:success] = 'The review mapping for "' + review_response_map.reviewee.username + '" and "' + review_response_map.reviewer.name + '" has been deleted.'
     else
       flash[:error] = 'This review has already been done. It cannot been deleted.'
     end
@@ -303,7 +303,7 @@ class ReviewMappingController < ApplicationController
   def delete_metareviewer
     mapping = MetareviewResponseMap.find(params[:id])
     assignment_id = mapping.assignment.id
-    flash[:note] = 'The metareview mapping for ' + mapping.reviewee.username + ' and ' + mapping.reviewer.username + ' has been deleted.'
+    flash[:note] = 'The metareview mapping for ' + mapping.reviewee.username + ' and ' + mapping.reviewer.name + ' has been deleted.'
 
     begin
       mapping.delete

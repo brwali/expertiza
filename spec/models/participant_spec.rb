@@ -39,7 +39,7 @@ describe Participant do
 
   describe '#name' do
     it 'returns the username of the user' do
-      expect(participant.username).to eq('Jane')
+      expect(participant.name).to eq('Jane')
     end
   end
 

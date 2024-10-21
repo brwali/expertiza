@@ -38,7 +38,7 @@ class ReviewResponseMap < ResponseMap
     mappings.each do |map|
       csv << [
         map.reviewee.username,
-        map.reviewer.username
+        map.reviewer.name
       ]
     end
   end

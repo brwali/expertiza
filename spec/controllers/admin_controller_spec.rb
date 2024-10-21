@@ -1,9 +1,9 @@
 describe AdminController do
-  let(:admin1) { build(:admin, id: 3, role_id: 4, parent_id: 1, name: 'Administrator1') }
-  let(:admin2) { build(:admin, id: 4, role_id: 4, parent_id: 1, name: 'Administrator2') }
+  let(:admin1) { build(:admin, id: 3, role_id: 4, parent_id: 1, username: 'Administrator1') }
+  let(:admin2) { build(:admin, id: 4, role_id: 4, parent_id: 1, username: 'Administrator2') }
   let(:super_admin) { build(:superadmin, id: 1, role_id: 5) }
-  let(:instructor1) { build(:instructor, id: 10, role_id: 3, parent_id: 3, name: 'Instructor1') }
-  let(:instructor2) { build(:instructor, id: 11, role_id: 3, parent_id: 4, name: 'Instructor2') }
+  let(:instructor1) { build(:instructor, id: 10, role_id: 3, parent_id: 3, username: 'Instructor1') }
+  let(:instructor2) { build(:instructor, id: 11, role_id: 3, parent_id: 4, username: 'Instructor2') }
   let(:student1) { build(:student, id: 21, role_id: 1) }
 
   # create fake lists

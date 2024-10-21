@@ -127,7 +127,7 @@ class Participant < ApplicationRecord
   def self.sort_by_name(participants)
     users = []
     participants.each { |p| users << p.user }
-    users.sort! { |a, b| a.name.downcase <=> b.name.downcase } # Sort the users based on the name
+    users.sort! { |a, b| a.username.downcase <=> b.username.downcase } # Sort the users based on the name
     participants.sort_by { |p| users.map(&:id).index(p.user_id) }
   end
 
@@ -138,7 +138,7 @@ class Participant < ApplicationRecord
       user = part.user
       tcsv.push(user.username, user.fullname, user.email) if options['personal_details'] == 'true'
       tcsv.push(user.role.name) if options['role'] == 'true'
-      tcsv.push(user.parent.name) if options['parent'] == 'true'
+      tcsv.push(user.parent.username) if options['parent'] == 'true'
       tcsv.push(user.email_on_submission, user.email_on_review, user.email_on_review_of_review) if options['email_options'] == 'true'
       tcsv.push(part.handle) if options['handle'] == 'true'
       csv << tcsv

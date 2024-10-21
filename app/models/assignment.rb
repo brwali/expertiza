@@ -177,10 +177,10 @@ class Assignment < ApplicationRecord
     end
 
     path_text = if !course_id.nil? && course_id > 0
-                  Rails.root.to_s + '/pg_data/' + FileHelper.clean_path(instructor[:name]) + '/' +
+                  Rails.root.to_s + '/pg_data/' + FileHelper.clean_path(instructor[:username]) + '/' +
                     FileHelper.clean_path(course.directory_path) + '/'
                 else
-                  Rails.root.to_s + '/pg_data/' + FileHelper.clean_path(instructor[:name]) + '/'
+                  Rails.root.to_s + '/pg_data/' + FileHelper.clean_path(instructor[:username]) + '/'
                 end
     path_text += FileHelper.clean_path(directory_path)
     path_text
@@ -444,7 +444,7 @@ class Assignment < ApplicationRecord
     reviewer = Participant.find(map.reviewer_id).user
     teams_csv << handle_nil(@reviewee.id) if detail_options['team_id'] == 'true'
     teams_csv << handle_nil(@reviewee.username) if detail_options['team_name'] == 'true'
-    teams_csv << handle_nil(reviewer.username) if detail_options['reviewer'] == 'true'
+    teams_csv << handle_nil(reviewer.name) if detail_options['reviewer'] == 'true'
     teams_csv << handle_nil(answer.question.txt) if detail_options['question'] == 'true'
     teams_csv << handle_nil(answer.question.id) if detail_options['question_id'] == 'true'
     teams_csv << handle_nil(answer.id) if detail_options['comment_id'] == 'true'

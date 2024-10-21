@@ -172,7 +172,7 @@ class AssignmentParticipant < Participant
     if response_map_id.nil?
       return if participant.nil?
 
-      no_team_path = assignment.path + '/' + participant.username.parameterize(separator: '_') + '_review'
+      no_team_path = assignment.path + '/' + participant.name.parameterize(separator: '_') + '_review'
       return no_team_path if participant.team.nil?
     end
 

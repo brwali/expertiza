@@ -164,7 +164,7 @@ class User < ApplicationRecord
   def self.import(row_hash, _row_header, session, _id = nil)
     raise ArgumentError, "Only #{row_hash.length} column(s) is(are) found. It must contain at least username, full name, email." if row_hash.length < 3
 
-    user = User.find_by_name(row_hash[:username])
+    user = User.find_by_username(row_hash[:username])
     if user.nil?
       attributes = ImportFileHelper.define_attributes(row_hash)
       user = ImportFileHelper.create_new_user(attributes, session)
@@ -259,7 +259,7 @@ class User < ApplicationRecord
       tcsv = []
       tcsv.push(user.username, user.fullname, user.email) if options['personal_details'] == 'true'
       tcsv.push(user.role.name) if options['role'] == 'true'
-      tcsv.push(user.parent.name) if options['parent'] == 'true'
+      tcsv.push(user.parent.username) if options['parent'] == 'true'
       tcsv.push(user.email_on_submission, user.email_on_review, user.email_on_review_of_review, user.copy_of_emails) if options['email_options'] == 'true'
       tcsv.push(user.etc_icons_on_homepage) if options['etc_icons_on_homepage'] == 'true'
       tcsv.push(user.handle) if options['handle'] == 'true'
