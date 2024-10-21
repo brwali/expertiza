@@ -147,7 +147,7 @@ FactoryBot.define do
     role { Role.where(name: 'Instructor').first || association(:role_of_instructor) }
     password 'password'
     password_confirmation 'password'
-    fullname '6, instructor'
+    name '6, instructor'
     email 'expertiza@mailinator.com'
     parent_id 1
     private_by_default  false
@@ -169,7 +169,7 @@ FactoryBot.define do
     role { Role.where(name: 'Teaching Assistant').first || association(:role_of_teaching_assistant) }
     password 'password'
     password_confirmation 'password'
-    fullname '5888, teaching assistant'
+    name '5888, teaching assistant'
     email 'expertiza@mailinator.com'
     parent_id 1
     private_by_default  false
@@ -574,7 +574,7 @@ FactoryBot.define do
   factory :requested_user, class: AccountRequest do
     name 'requester1'
     role_id 2
-    fullname 'requester, requester'
+    name 'requester, requester'
     institution_id 1
     email 'requester1@test.com'
     status 'Under Review'
@@ -641,7 +641,7 @@ FactoryBot.define do
 
   factory :test_user, class: User do
     name 'username'
-    fullname 'full name'
+    name 'full name'
     email 'abc@mailinator.com'
   end
 

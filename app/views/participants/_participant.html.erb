@@ -1,7 +1,7 @@
 <% userid << participant.user_id %>
 <tr class= "" style="font-size: 15px">
   <td ><%= link_to participant.user.name(session[:ip]), impersonate_impersonate_path(:user => {:name => participant.user.name(session[:ip])}), :method => :post %></td>
-  <td ><%= link_to participant.user.fullname(session[:ip]), :controller=> 'users', :action => 'show', :id => participant.user_id %></td>
+  <td ><%= link_to participant.user.name(session[:ip]), :controller=> 'users', :action => 'show', :id => participant.user_id %></td>
   <td><a href="mailto: <%= participant.user.email(session[:ip]) %>"><%= participant.user.email(session[:ip]) %></a></td>
   <td><%= participant.user.role.name %></td>
   <td align = "left"><%= (User.find(participant.user.parent_id)).name(session[:ip]) %></td>

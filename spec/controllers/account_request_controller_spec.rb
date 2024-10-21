@@ -120,7 +120,7 @@ describe AccountRequestController do
       requested_user: { self_introduction: 'I am good' },
       user: { name: 'instructor6',
               role_id: 2,
-              fullname: '6, instructor',
+              name: '6, instructor',
               institution_id: 1,
               email: 'chenzy@gmail.com' }
     }
