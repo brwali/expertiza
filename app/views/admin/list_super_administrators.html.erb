@@ -1,7 +1,7 @@
 <h1>Super-Administrators</h1>
 
 <table>
-  <tr><th>Name</th><th>Full name</th><th>E-mail address</th></tr>
+  <tr><th>User name</th><th>Full name</th><th>E-mail address</th></tr>
   <% for user in @users %>
     <tr>
       <td><%= link_to user.username(session[:ip]), :action => 'show_super_administrator',

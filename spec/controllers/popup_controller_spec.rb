@@ -8,8 +8,8 @@ describe PopupController do
 
   let(:instructor) { build_stubbed(:instructor, id: 6) }
   let(:team) { build_stubbed(:assignment_team, id: 1, name: 'team1', assignment: assignment) }
-  let(:student) { build_stubbed(:student, id: 1, name: 'student') }
-  let(:student2) { build_stubbed(:student, id: 2, name: 'student2') }
+  let(:student) { build_stubbed(:student, id: 1, username: 'student') }
+  let(:student2) { build_stubbed(:student, id: 2, username: 'student2') }
   let(:participant) { build_stubbed(:participant, id: 1, user_id: 1, user: student, assignment: assignment) }
   let(:participant2) { build_stubbed(:participant, id: 2, user: student2, assignment: assignment) }
   let(:response) { build_stubbed(:response, id: 1) }

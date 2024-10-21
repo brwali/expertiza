@@ -21,8 +21,8 @@
       @join_team_requests = JoinTeamRequest.where(team_id: result[:team_id])
       @join_team_requests.each do |join_team_request|
         if join_team_request.status=='P'
-          requesters_names << User.find(Participant.find(join_team_request.participant_id).user_id).name
-          requesters << {name: User.find(Participant.find(join_team_request.participant_id).user_id).name, request_id: join_team_request.id}
+          requesters_names << User.find(Participant.find(join_team_request.participant_id).user_id).username
+          requesters << {username: User.find(Participant.find(join_team_request.participant_id).user_id).username, request_id: join_team_request.id}
         end
       end 
     %>
@@ -30,7 +30,7 @@
     <%
       team_members = []
       TeamsUser.where(team_id: result[:team_id]).each{|teamuser|
-        team_members << User.find(teamuser.user_id).name
+        team_members << User.find(teamuser.user_id).username
       }
       if result[:advertise_for_partner]|| result[:advertise_for_partner] == 1
     %>

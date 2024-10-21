@@ -148,7 +148,7 @@ describe UsersController do
       instructor = create(:instructor)
       stub_current_user(teaching_assistant, teaching_assistant.role.name, teaching_assistant.role)
       request_params = {
-        user: { username: instructor.name }
+        user: { username: instructor.username }
       }
       user_session = { user: teaching_assistant }
       post :show_if_authorized, params: request_params, session: user_session

@@ -2,7 +2,7 @@
 
 <br/>
 <%= form_tag :action => 'show_if_authorized' do %>
-  View user - enter exact login: <%= text_field_with_auto_complete :user, :name, {:size => 41} %>
+  View user - enter exact login: <%= text_field_with_auto_complete :user, :username, {:size => 41} %>
 <input type='submit' value='Edit'/>
 <% end %>
 

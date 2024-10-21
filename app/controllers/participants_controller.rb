@@ -144,12 +144,12 @@ class ParticipantsController < ApplicationController
 
     unless params[:participant].nil?
       if !AssignmentParticipant.where(parent_id: @participant.parent_id, handle: params[:participant][:handle]).empty?
-        ExpertizaLogger.error LoggerMessage.new(controller_name, @participant.name, "Handle #{params[:participant][:handle]} already in use", request)
+        ExpertizaLogger.error LoggerMessage.new(controller_name, @participant.username, "Handle #{params[:participant][:handle]} already in use", request)
         flash[:error] = "<b>The handle #{params[:participant][:handle]}</b> is already in use for this assignment. Please select a different one."
         redirect_to controller: 'participants', action: 'change_handle', id: @participant
       else
         @participant.update_attributes(participant_params)
-        ExpertizaLogger.info LoggerMessage.new(controller_name, @participant.name, 'The change handle is saved successfully', request)
+        ExpertizaLogger.info LoggerMessage.new(controller_name, @participant.username, 'The change handle is saved successfully', request)
         redirect_to controller: 'student_task', action: 'view', id: @participant
       end
     end
@@ -158,13 +158,13 @@ class ParticipantsController < ApplicationController
   # Deletes participants from an assignment
   def delete
     contributor = AssignmentParticipant.find(params[:id])
-    name = contributor.name
+    username = contributor.username
     assignment_id = contributor.assignment
     begin
         contributor.destroy
-        flash[:note] = "\"#{name}\" is no longer a participant in this assignment."
+        flash[:note] = "\"#{username}\" is no longer a participant in this assignment."
     rescue StandardError
-      flash[:error] = "\"#{name}\" was not removed from this assignment. Please ensure that \"#{name}\" is not a reviewer or metareviewer and try again."
+      flash[:error] = "\"#{username}\" was not removed from this assignment. Please ensure that \"#{username}\" is not a reviewer or metareviewer and try again."
       end
     redirect_to controller: 'review_mapping', action: 'list_mappings', id: assignment_id
   end
@@ -204,7 +204,7 @@ class ParticipantsController < ApplicationController
   # Get the user info from the team user
   def get_user_info(team_user, assignment)
     user = {}
-    user[:username] = team_user.name
+    user[:username] = team_user.username
     user[:fullname] = team_user.fullname
     # set by default
     permission_granted = false

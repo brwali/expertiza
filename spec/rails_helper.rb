@@ -62,7 +62,7 @@ RSpec.configure do |config|
     File.open('log/diagnostic.txt', 'a') { |f| f.write msg }
 
     visit root_path
-    fill_in 'login_name', with: user_name
+    fill_in 'login_username', with: user_name
     fill_in 'login_password', with: 'password'
     click_button 'Sign in'
     stub_current_user(user, user.role.name, user.role)

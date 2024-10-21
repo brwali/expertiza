@@ -105,7 +105,7 @@ class SuggestionController < ApplicationController
         subject: "Suggested topic '#{@suggestion.title}' has been approved",
         body: {
           approved_topic_name: @suggestion.title,
-          proposer: proposer.name
+          proposer: proposer.username
         }
       ).deliver_now!
     end

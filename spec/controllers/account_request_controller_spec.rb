@@ -2,12 +2,12 @@ describe AccountRequestController do
   let(:admin) { build(:admin, id: 3) }
   let(:super_admin) { build(:superadmin) }
   let(:instructor) { build(:instructor, id: 2) }
-  let(:student1) { build(:student, id: 1, name: :lily) }
+  let(:student1) { build(:student, id: 1, username: :lily) }
   let(:student2) { build(:student) }
   let(:student3) { build(:student, id: 10, role_id: 1, parent_id: nil) }
   let(:student4) { build(:student, id: 20, role_id: 4) }
   let(:student5) { build(:student, role_id: 4, parent_id: 3) }
-  let(:student6) { build(:student, role_id: nil, name: :lilith) }
+  let(:student6) { build(:student, role_id: nil, username: :lilith) }
 
   let(:institution1) { build(:institution, id: 1) }
   let(:requested_user1) do

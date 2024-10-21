@@ -107,8 +107,8 @@ class User < ApplicationRecord
   # from their anonymized names. The process of obtaining
   # real name is exactly opposite of what we'd do to get
   # anonymized name from their real name.
-  def self.real_user_from_anonymized_name(anonymized_name)
-    user = User.find_by(username: anonymized_name)
+  def self.real_user_from_anonymized_username(anonymized_username)
+    user = User.find_by(username: anonymized_username)
     user
   end
 
@@ -195,7 +195,7 @@ class User < ApplicationRecord
     if user.nil?
       items = login.split('@')
       short_name = items[0]
-      user_list = User.where('name = ?', short_name)
+      user_list = User.where('username = ?', short_name)
       user = user_list.first if user_list.any? && user_list.length == 1
     end
     user

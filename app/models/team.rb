@@ -260,7 +260,7 @@ class Team < ApplicationRecord
       if options[:team_name] == 'false'
         team_members = TeamsUser.where(team_id: team.id)
         team_members.each do |user|
-          output.push(user.username)
+          output.push(user.user)
         end
       end
       csv << output

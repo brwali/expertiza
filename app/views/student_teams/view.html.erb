@@ -189,7 +189,7 @@
         </tr>
           <% @send_invs.each do |inv| %>
             <tr>
-              <td><%= inv.to_user.name(session[:ip]) %></td>
+              <td><%= inv.to_user.username(session[:ip]) %></td>
               <td><%= inv.to_user.fullname(session[:ip]) %></td>
               <td><%= inv.to_user.email(session[:ip]) %></td>
                 <% if inv.reply_status == 'A' %>
@@ -226,7 +226,7 @@
          <table style="width:80%" align="center" >
            <tr>
             <td>
-              <%=t ".enter_user"%><%= text_field_with_auto_complete :user, :name, {:size => 41} %>
+              <%=t ".enter_user"%><%= text_field_with_auto_complete :user, :username, {:size => 41} %>
               <input type='submit' value='Invite'/>
             </td>
            </tr>
@@ -266,7 +266,7 @@
       <% @received_invs.each do |inv| %>
           <% if inv.reply_status == 'W' %>
               <tr>
-                <td><%= inv.from_user.name(session[:ip]) %></td>
+                <td><%= inv.from_user.username(session[:ip]) %></td>
                 <td>
                   <% teams_users = TeamsUser.where(['user_id = ?', inv.from_id]) %>
                   <% teams_users.each do |teams_user| %>

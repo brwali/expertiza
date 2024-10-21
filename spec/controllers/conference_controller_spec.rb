@@ -3,8 +3,8 @@ describe ConferenceController do
   let(:super_admin) { build(:superadmin) }
   let(:instructor) { build(:instructor, id: 2) }
   let(:instructor1) { build(:instructor, id: 2, timezonepref: 'Eastern Time (US & Canada)') }
-  let(:student1) { build(:student, id: 1, name: :lily) }
-  let(:student1) { build(:student, id: 2, name: :lily23) }
+  let(:student1) { build(:student, id: 1, username: :lily) }
+  let(:student1) { build(:student, id: 2, username: :lily23) }
   let(:student2) { build(:student) }
   let(:student3) { build(:student, id: 10, role_id: 1, parent_id: nil) }
   let(:student4) { build(:student, id: 20, role_id: 4) }
@@ -46,7 +46,7 @@ describe ConferenceController do
 
     it 'save successfully for new Author' do
       request_params = {
-        user: { name: 'lily',
+        user: { username: 'lily',
                 role_id: 2,
                 email: 'chenzy@gmail.com',
                 fullname: 'John Bumgardner',
