@@ -197,7 +197,7 @@ describe UsersController do
       allow(User).to receive(:find).with(3).and_return(admin)
     end
     it 'save successfully with email as name' do
-      allow(User).to receive(:find_by).with(name: 'lily').and_return(student1)
+      allow(User).to receive(:find_by).with(username: 'lily').and_return(student1)
       user_session = { user: admin }
       request_params = {
         user: { username: 'lily',

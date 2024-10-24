@@ -137,7 +137,7 @@ describe 'airbrake-1517247902792549741' do
 
   it "can access to '/student_task/list' after login as a student" do
     stu = create(:student)
-    login_as stu.name
+    login_as stu.username
     visit '/tree_display/list'
     expect(page).to have_current_path('/student_task/list')
     expect(page).to have_content('Assignments')

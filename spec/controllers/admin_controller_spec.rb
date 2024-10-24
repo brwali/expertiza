@@ -20,12 +20,12 @@ describe AdminController do
     allow(User).to receive(:where).with(['role_id = ?', super_admin.role_id]).and_return([super_admin])
 
     allow(User).to receive(:where).with(role_id: admin1.role).and_return(admin_list)
-    allow(admin_list).to receive(:order).with(:name).and_return(admin_list)
+    allow(admin_list).to receive(:order).with(:username).and_return(admin_list)
     allow(admin_list).to receive(:where).with('parent_id = ?', super_admin.id).and_return(admin_list)
     allow(admin_list).to receive(:paginate).with(page: '1', per_page: 50).and_return(admin_list)
 
     allow(User).to receive(:where).with(role_id: instructor1.role).and_return(instructor_list)
-    allow(instructor_list).to receive(:order).with(:name).and_return(instructor_list)
+    allow(instructor_list).to receive(:order).with(:username).and_return(instructor_list)
     allow(instructor_list).to receive(:where).with('parent_id = ?', admin1.id).and_return(instructor_list_pid3)
     allow(instructor_list_pid3).to receive(:paginate).with(page: '1', per_page: 50).and_return(instructor_list_pid3)
   end

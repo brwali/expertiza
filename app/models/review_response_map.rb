@@ -34,10 +34,10 @@ class ReviewResponseMap < ResponseMap
 
   def self.export(csv, parent_id, _options)
     mappings = where(reviewed_object_id: parent_id).to_a
-    mappings.sort! { |a, b| a.reviewee.username <=> b.reviewee.username }
+    mappings.sort! { |a, b| a.reviewee.name <=> b.reviewee.name }
     mappings.each do |map|
       csv << [
-        map.reviewee.username,
+        map.reviewee.name,
         map.reviewer.name
       ]
     end

@@ -36,7 +36,7 @@ describe 'review mapping' do
     create(:deadline_right, name: 'OK')
 
     (1..10).each do |i|
-      student = create :student, name: 'student' + i.to_s
+      student = create :student, username: 'student' + i.to_s
       create :participant, assignment: @assignment, user: student
       if (i % 3 == 1) && (i != 10)
         instance_variable_set('@team' + (i / 3 + 1).to_s, create(:assignment_team, name: 'team' + i.to_s))

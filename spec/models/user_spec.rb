@@ -264,28 +264,28 @@ describe User do
   describe '#instructor_id' do
     before(:each) { user.id = 1 }
     it 'returns id when role of current user is a super admin' do
-      allow(user).to receive_message_chain(:role, :username).and_return('Super-Administrator')
+      allow(user).to receive_message_chain(:role, :name).and_return('Super-Administrator')
       expect(user.instructor_id).to eq 1
     end
 
     it 'returns id when role of current user is an Administrator' do
-      allow(user).to receive_message_chain(:role, :username).and_return('Administrator')
+      allow(user).to receive_message_chain(:role, :name).and_return('Administrator')
       expect(user.instructor_id).to eq 1
     end
 
     it 'returns id when role of current user is an Instructor' do
-      allow(user).to receive_message_chain(:role, :username).and_return('Instructor')
+      allow(user).to receive_message_chain(:role, :name).and_return('Instructor')
       expect(user.instructor_id).to eq 1
     end
 
     it 'returns instructor_id when role of current user is a TA' do
-      allow(user).to receive_message_chain(:role, :username).and_return('Teaching Assistant')
+      allow(user).to receive_message_chain(:role, :name).and_return('Teaching Assistant')
       allow(Ta).to receive(:get_my_instructor).and_return(6)
       expect(user.instructor_id).to eq 6
     end
 
     it 'raise an error when role of current user is other type' do
-      allow(user).to receive_message_chain(:role, :username).and_return('Student')
+      allow(user).to receive_message_chain(:role, :name).and_return('Student')
       expect { user.instructor_id }.to raise_error(NotImplementedError, /for role Student/)
     end
   end
@@ -293,7 +293,7 @@ describe User do
   describe '.export' do
     before(:each) do
       allow(User).to receive(:all).and_return([user])
-      allow(user).to receive_message_chain(:role, :username).and_return('Student')
+      allow(user).to receive_message_chain(:role, :name).and_return('Student')
       allow(user).to receive_message_chain(:parent, :username).and_return('Instructor')
     end
 
@@ -381,14 +381,14 @@ describe User do
 
     it 'returns false if current user is a TA, but target user is not a student' do
       allow(user).to receive(:teaching_assistant?).and_return(true)
-      allow(user1).to receive_message_chain(:role, :username).and_return('Instructor')
+      allow(user1).to receive_message_chain(:role, :name).and_return('Instructor')
       expect(user.teaching_assistant_for?(user1)).to be false
     end
 
     it 'returns true if current user is a TA of target user' do
       allow(user).to receive(:teaching_assistant?).and_return(true)
-      allow(user1).to receive_message_chain(:role, :username).and_return('Student')
-      allow(user2).to receive_message_chain(:role, :username).and_return('Student')
+      allow(user1).to receive_message_chain(:role, :name).and_return('Student')
+      allow(user2).to receive_message_chain(:role, :name).and_return('Student')
       user.id = 1
       allow(Ta).to receive(:find).with(1).and_return(user)
       course = double('Course')
@@ -444,7 +444,7 @@ describe User do
     it 'returns correct real name from anonymized name' do
       student = create(:student)
       expect(student.username).not_to eq 'Student' + student.id.to_s
-      real_student = User.real_user_from_anonymized_name(student.username)
+      real_student = User.real_user_from_anonymized_username(student.username)
       expect(student.username).to eq real_student.username
       expect(student).to eq real_student
     end

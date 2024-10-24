@@ -9,7 +9,7 @@ describe ParticipantsHelper do
                 allow(Role).to receive(:find_by).with({:name=>'Student'}).and_return(1)
                 attribute = ParticipantsHelper.define_attributes(line_split,config)
                 expect(attribute['role_id']).to eq(1)
-                expect(attribute['name']).to eq('Test1')
+                expect(attribute['username']).to eq('Test1')
                 expect(attribute['fullname']).to eq('test2')
                 expect(attribute['email']).to eq('test@ncsu.edu')
                 expect(attribute['password'].length).to eq(8)
