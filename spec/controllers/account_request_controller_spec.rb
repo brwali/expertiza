@@ -11,7 +11,7 @@ describe AccountRequestController do
 
   let(:institution1) { build(:institution, id: 1) }
   let(:requested_user1) do
-    AccountRequest.new id: 4, name: 'requester1', role_id: 2, fullname: 're, requester1',
+    AccountRequest.new id: 4, username: 'requester1', role_id: 2, fullname: 're, requester1',
                        institution_id: 1, email: 'requester1@test.com', status: nil, self_introduction: 'no one'
   end
   let(:superadmin) { build(:superadmin) }

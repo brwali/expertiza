@@ -572,7 +572,7 @@ FactoryBot.define do
   end
 
   factory :requested_user, class: AccountRequest do
-    name 'requester1'
+    username 'requester1'
     role_id 2
     fullname 'requester, requester'
     institution_id 1

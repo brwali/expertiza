@@ -14,7 +14,7 @@ describe ConferenceController do
   let(:institution1) { build(:institution, id: 1) }
   let(:assignment1) { build(:assignment, id: 2, is_conference_assignment: 1, max_team_size: 100) }
   let(:requested_user1) do
-    AccountRequest.new id: 4, name: 'requester1', role_id: 2, fullname: 're, requester1',
+    AccountRequest.new id: 4, username: 'requester1', role_id: 2, fullname: 're, requester1',
                        institution_id: 1, email: 'requester1@test.com', status: nil, self_introduction: 'no one'
   end
   let(:superadmin) { build(:superadmin) }
@@ -62,7 +62,7 @@ describe ConferenceController do
 
     it 'save successfully for existing user as Author' do
       request_params = {
-        user: { name: 'lily',
+        user: { username: 'lily',
                 assignment: '2' }
       }
       allow(User).to receive(:find_by).with(name: 'lily').and_return(student1)
@@ -75,7 +75,7 @@ describe ConferenceController do
     end
     it 'return error if user email already exist' do
       request_params = {
-        user: { name: 'lily',
+        user: { username: 'lily',
                 role_id: 2,
                 email: 'chenzy@gmail.com',
                 fullname: 'John Bumgardner',
@@ -88,7 +88,7 @@ describe ConferenceController do
       post :create, params: request_params
 
       request_params2 = {
-        user: { name: 'lily23',
+        user: { username: 'lily23',
                 role_id: 2,
                 email: 'chenzy@gmail.com',
                 fullname: 'John Bumgardner',
@@ -106,7 +106,7 @@ describe ConferenceController do
     it 'should redirect to root with correct recaptcha' do
       user_session = { user: student1 }
       request_params = {
-        user: { name: 'lily',
+        user: { username: 'lily',
                 crypted_password: 'password',
                 role_id: 1,
                 password_salt: 1,
@@ -136,7 +136,7 @@ describe ConferenceController do
     it 'should redirect to join conference page with incorrect recaptcha' do
       user_session = { user: student2 }
       request_params = {
-        user: { name: 'lily2',
+        user: { username: 'lily2',
                 crypted_password: 'password',
                 role_id: 1,
                 password_salt: 1,
