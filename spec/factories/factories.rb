@@ -53,7 +53,7 @@ FactoryBot.define do
     role { Role.where(name: 'Administrator').first || association(:role_of_administrator) }
     password 'password'
     password_confirmation 'password'
-    sequence(:fullname) { |n| "#{n}, administrator" }
+    sequence(:name) { |n| "#{n}, administrator" }
     email 'expertiza@mailinator.com'
     parent_id 1
     private_by_default  false
