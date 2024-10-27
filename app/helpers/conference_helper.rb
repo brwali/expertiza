@@ -119,7 +119,7 @@ module ConferenceHelper
   end
 
   def user_params
-    params.require(:user).permit(:name,
+    params.require(:user).permit(:username,
                                  :fullname,
                                  :role_id,
                                  :email,
