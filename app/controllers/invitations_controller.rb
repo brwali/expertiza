@@ -81,7 +81,7 @@ class InvitationsController < ApplicationController
       prepared_mail = MailerHelper.send_mail_to_user(@user, 'Invitation Received on Expertiza', 'invite_participant_to_team', '')
       prepared_mail.deliver
     end
-    ExpertizaLogger.info LoggerMessage.new(controller_name, @student.username, "Successfully invited student #{@user.id}", request)
+    ExpertizaLogger.info LoggerMessage.new(controller_name, @student.name, "Successfully invited student #{@user.id}", request)
   end
 
   def check_user_before_invitation

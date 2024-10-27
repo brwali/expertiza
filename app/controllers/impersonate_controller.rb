@@ -145,7 +145,7 @@ class ImpersonateController < ApplicationController
 
   def real_user(username)
     if User.anonymized_view?(session[:ip])
-      user = User.real_user_from_anonymized_name(username)
+      user = User.real_user_from_anonymized_username(username)
     else
       user = User.find_by(username: username)
     end
