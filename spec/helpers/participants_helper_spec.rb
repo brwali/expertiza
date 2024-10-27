@@ -3,7 +3,7 @@ describe ParticipantsHelper do
         context 'when define_attributes is called' do
             #Checking if attributes have been correctly defined
             line_split = ['Test1','test@ncsu.edu']
-            config = {'fullname'=>'test2','email'=>'1'}
+            config = {'name'=>'test2','email'=>'1'}
 
             it 'returns correct hash "attributes" when define_attributes is called' do
                 allow(Role).to receive(:find_by).with({:name=>'Student'}).and_return(1)
