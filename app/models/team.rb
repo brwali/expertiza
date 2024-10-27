@@ -78,7 +78,7 @@ class Team < ApplicationRecord
 
   # Add member to the team, changed to hash by E1776
   def add_member(user, _assignment_id = nil)
-    username = user?(user) ? user.username : user.name
+    username = user.method_defined? :username ? user.username : user.name
     raise "The user #{username} is already a member of the team #{name}" if user?(user)
 
     can_add_member = false
