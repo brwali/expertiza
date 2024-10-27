@@ -163,7 +163,7 @@ class AccountRequestController < ApplicationController
   end
 
   def requested_user_params
-    params.require(:user).permit(:username, :role_id, :fullname, :institution_id, :email)
+    params.require(:user).permit(:username, :role_id, :name, :institution_id, :email)
           .merge(self_introduction: params[:requested_user][:self_introduction])
   end
 end
