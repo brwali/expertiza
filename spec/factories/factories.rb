@@ -147,7 +147,7 @@ FactoryBot.define do
     role { Role.where(name: 'Instructor').first || association(:role_of_instructor) }
     password 'password'
     password_confirmation 'password'
-    name '6, instructor'
+    fullname '6, instructor'
     email 'expertiza@mailinator.com'
     parent_id 1
     private_by_default  false
