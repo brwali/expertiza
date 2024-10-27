@@ -16,7 +16,7 @@ describe User do
       expect(user).not_to be_valid
     end
     it 'Validate that username is always unique' do
-      expect(user1).to validate_uniqueness_of(:username)
+      expect(user1).to validate_uniqueness_of(:username).case_insensitive
     end
     it 'Validate that the username does not contain white spaces' do
       expect(user).to be_valid
