@@ -158,7 +158,7 @@ class ParticipantsController < ApplicationController
   # Deletes participants from an assignment
   def delete
     contributor = AssignmentParticipant.find(params[:id])
-    username = contributor.username
+    username = contributor.name
     assignment_id = contributor.assignment
     begin
         contributor.destroy

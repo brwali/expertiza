@@ -65,7 +65,7 @@ describe ConferenceController do
         user: { username: 'lily',
                 assignment: '2' }
       }
-      allow(User).to receive(:find_by).with(name: 'lily').and_return(student1)
+      allow(User).to receive(:find_by).with(username: 'lily').and_return(student1)
       allow(Assignment).to receive(:find_by_id).with('2').and_return(assignment1)
       allow(Assignment).to receive(:find).with('2').and_return(assignment1)
       allow(AssignmentParticipant).to receive(:create).with(any_args).and_return(participant)

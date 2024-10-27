@@ -123,7 +123,7 @@ describe PopupController do
   describe '#reviewer_details_popup' do
     it 'render reviewer_details_popup page successfully' do
       participant = double(:participant, user_id: 1)
-      user = double(:user, fullname: 'Test User', name: 'Test', email: 'test@gmail.com', handle: 1)
+      user = double(:user, fullname: 'Test User', username: 'Test', email: 'test@gmail.com', handle: 1)
       allow(Participant).to receive(:find).with('1').and_return(participant)
       allow(User).to receive(:find).with(participant.user_id).and_return(user)
       request_params = { id: 1, assignment_id: 1 }

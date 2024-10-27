@@ -4,7 +4,7 @@ describe PasswordRetrievalController do
       @user = User.new
       @user.email = 'example@example.edu'
       @user.fullname = 'John Bumgardner'
-      @user.username = 'ex'
+      @user.username = 'exe'
       @user.save!
       request_params = { user: { email: 'example@example.edu' } }
       post :send_password, params: request_params
