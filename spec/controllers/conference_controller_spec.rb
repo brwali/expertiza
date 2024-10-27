@@ -75,7 +75,7 @@ describe ConferenceController do
     end
     it 'return error if user email already exist' do
       request_params = {
-        user: { name: 'lily',
+        user: { username: 'lily',
                 role_id: 2,
                 email: 'chenzy@gmail.com',
                 fullname: 'John Bumgardner',
