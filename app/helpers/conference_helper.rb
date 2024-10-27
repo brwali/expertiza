@@ -36,7 +36,7 @@ module ConferenceHelper
   end
 
   def create_author
-    params[:user][:username] = params[:user][:email] unless !params[:user][:username].nil? && !params[:user][:username].empty?
+    params[:user][:name] = params[:user][:email] unless !params[:user][:name].nil? && !params[:user][:name].empty?
     is_author = true
     # Assign all user params for creating author using assign_user_params function
     @user = assign_user_params(is_author)
@@ -53,8 +53,8 @@ module ConferenceHelper
   end
 
   def create_coauthor
-    check = User.find_by(username: params[:user][:username])
-    params[:user][:username] = params[:user][:email] unless check.nil?
+    check = User.find_by(username: params[:user][:name])
+    params[:user][:name] = params[:user][:email] unless check.nil?
     User.skip_callback(:create, :after, :email_welcome)
     is_author = false
     # Assign all user params for creating co-author using assign_user_params function
