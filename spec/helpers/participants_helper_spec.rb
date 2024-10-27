@@ -10,7 +10,7 @@ describe ParticipantsHelper do
                 attribute = ParticipantsHelper.define_attributes(line_split,config)
                 expect(attribute['role_id']).to eq(1)
                 expect(attribute['username']).to eq('Test1')
-                expect(attribute['fullname']).to eq('test2')
+                expect(attribute['name']).to eq('test2')
                 expect(attribute['email']).to eq('test@ncsu.edu')
                 expect(attribute['password'].length).to eq(8)
                 expect(attribute['email_on_submission']).to eq(1)
