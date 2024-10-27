@@ -139,17 +139,17 @@ describe ReviewResponseMap do
     allow(User).to receive(:find_by).and_return(nil)
     expect { ReviewResponseMap.import(row_hash, session, 1) }.to raise_error(ArgumentError, 'Cannot find reviewee user.')
     # when reviewee user exists but reviewee user is not a participant in this assignment
-    allow(User).to receive(:find_by).with(name: 'name').and_return(student)
+    allow(User).to receive(:find_by).with(username: 'name').and_return(student)
     allow(AssignmentParticipant).to receive(:find_by).with(user_id: 1, parent_id: 1).and_return(nil)
     expect { ReviewResponseMap.import(row_hash, session, 1) }.to raise_error(ArgumentError, 'Reviewee user is not a participant in this assignment.')
     # when reviewee user exists and reviewee user is a participant in this assignment
     allow(AssignmentParticipant).to receive(:find_by).with(user_id: 1, parent_id: 1).and_return(participant)
     allow(AssignmentTeam).to receive(:team).with(participant).and_return(team)
     ## when reviewer user doesn't exist
-    allow(User).to receive(:find_by).with(name: 'name1').and_return(nil)
+    allow(User).to receive(:find_by).with(username: 'name1').and_return(nil)
     expect { ReviewResponseMap.import(row_hash, session, 1) }.to raise_error(ArgumentError, 'Cannot find reviewer user.')
     ## when reviewer user exist
-    allow(User).to receive(:find_by).with(name: 'name1').and_return(student1)
+    allow(User).to receive(:find_by).with(username: 'name1').and_return(student1)
     ### when reviewer user is not a participant in this assignment.
     allow(AssignmentParticipant).to receive(:find_by).with(user_id: 2, parent_id: 1).and_return(nil)
     expect { ReviewResponseMap.import(row_hash, session, 1) }.to raise_error(ArgumentError, 'Reviewer user is not a participant in this assignment.')
@@ -166,7 +166,7 @@ describe ReviewResponseMap do
     allow(TeamsUser).to receive(:create).with(team_id: 1, user_id: 1).and_return(double('teams_users', id: 1, team_id: 1, user_id: 1))
     allow(TeamNode).to receive(:create).with(parent_id: assignment_id, node_object_id: 1).and_return(double('team_node', id: 1, parent_id: 1, node_object_id: 1))
     allow(TeamUserNode).to receive(:create).with(parent_id: 1, node_object_id: 1).and_return(double('team_user_node', id: 1, parent_id: 1, node_object_id: 1))
-    allow(User).to receive(:find_by).with(name: 'name1').and_return(student1)
+    allow(User).to receive(:find_by).with(username: 'name1').and_return(student1)
     allow(AssignmentParticipant).to receive(:find_by).with(user_id: 2, parent_id: 1).and_return(participant1)
     allow(ReviewResponseMap).to receive(:find_or_create_by)
       .with(reviewed_object_id: 1, reviewer_id: 1, reviewee_id: 1, calibrate_to: false).and_return(review_response_map)

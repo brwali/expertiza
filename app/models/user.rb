@@ -20,7 +20,7 @@ class User < ApplicationRecord
   belongs_to :parent, class_name: 'User'
   belongs_to :role
   validates :username, presence: true
-  validates :username, uniqueness: true
+  validates_uniqueness_of :username, :case_sensitive => true
   validates :username, format: { without: /\s/ }
 
   validates :email, presence: { message: "can't be blank" }

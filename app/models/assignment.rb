@@ -483,7 +483,7 @@ class Assignment < ApplicationRecord
     @assignment = Assignment.find(parent_id)
     fields = []
     fields << 'Assignment Name: ' + @assignment.name.to_s
-    fields << 'Assignment Instructor: ' + User.find(@assignment.instructor_id).name.to_s
+    fields << 'Assignment Instructor: ' + User.find(@assignment.instructor_id).username.to_s
     fields
   end
 
