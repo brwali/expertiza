@@ -43,7 +43,7 @@ class AssignmentTeam < Team
   end
 
   # Get the name of the class
-  def name
+  def fullname
     name
   end
 
