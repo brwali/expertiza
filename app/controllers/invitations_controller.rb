@@ -86,7 +86,7 @@ class InvitationsController < ApplicationController
 
   def check_user_before_invitation
     # user is the student you are inviting to your team
-    @user = User.find_by(username: params[:user][:name].strip)
+    @user = User.find_by(username: params[:user][:username].strip)
     # User/Author has information about the participant
     @student = AssignmentParticipant.find(params[:student_id])
     @assignment = Assignment.find(@student.parent_id)
