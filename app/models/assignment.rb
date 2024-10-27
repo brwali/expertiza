@@ -444,7 +444,7 @@ class Assignment < ApplicationRecord
     reviewer = Participant.find(map.reviewer_id).user
     teams_csv << handle_nil(@reviewee.id) if detail_options['team_id'] == 'true'
     teams_csv << handle_nil(@reviewee.name) if detail_options['team_name'] == 'true'
-    teams_csv << handle_nil(reviewer.name) if detail_options['reviewer'] == 'true'
+    teams_csv << handle_nil(reviewer.username) if detail_options['reviewer'] == 'true'
     teams_csv << handle_nil(answer.question.txt) if detail_options['question'] == 'true'
     teams_csv << handle_nil(answer.question.id) if detail_options['question_id'] == 'true'
     teams_csv << handle_nil(answer.id) if detail_options['comment_id'] == 'true'
