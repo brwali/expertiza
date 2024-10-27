@@ -18,7 +18,7 @@ class InvitationsController < ApplicationController
     if Invitation.is_invited?(@student.user_id, @user.id, @student.parent_id)
       create_utility
     else
-      ExpertizaLogger.error LoggerMessage.new('', @student.username, 'Student was already invited')
+      ExpertizaLogger.error LoggerMessage.new('', @student.name, 'Student was already invited')
       flash[:note] = "You have already sent an invitation to \"#{@user.username}\"."
     end
 
