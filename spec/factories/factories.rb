@@ -75,7 +75,7 @@ FactoryBot.define do
     role { Role.where(name: 'Super-Administrator').first || association(:role_of_superadministrator) }
     password 'password'
     password_confirmation 'password'
-    sequence(:fullname) { |n| "#{n}, superadministrator" }
+    sequence(:name) { |n| "#{n}, superadministrator" }
     email 'expertiza@mailinator.com'
     parent_id 1
     private_by_default  false
@@ -125,7 +125,7 @@ FactoryBot.define do
     role { Role.where(name: 'Student').first || association(:role_of_student) }
     password 'password'
     password_confirmation 'password'
-    sequence(:fullname) { |n| n = n % 3; "206#{n + 4}, student" }
+    sequence(:name) { |n| n = n % 3; "206#{n + 4}, student" }
     email 'expertiza@mailinator.com'
     parent_id 1
     private_by_default  false
