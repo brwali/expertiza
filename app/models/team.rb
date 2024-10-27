@@ -261,7 +261,7 @@ class Team < ApplicationRecord
       if options[:team_name] == 'false'
         team_members = TeamsUser.where(team_id: team.id)
         team_members.each do |user|
-          user_export = user.is_a?(User) ? user.username : user.user
+          user_export = user.user.respond_to?(:username) ? user.user.username : user.user
           output.push(user_export)
         end
       end
