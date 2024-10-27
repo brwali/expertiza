@@ -47,7 +47,7 @@ describe InvitationsController do
       allow(AssignmentParticipant).to receive(:find).with('1').and_return(participant)
       allow(Assignment).to receive(:find).with(1).and_return(assignment)
       request_params = {
-        user: { name: 'student@gmail.com', email: 'student@gmail.com' },
+        user: { username: 'student@gmail.com', email: 'student@gmail.com' },
         student_id: 1
       }
       user_session = { user: student }
