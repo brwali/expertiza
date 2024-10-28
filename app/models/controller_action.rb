@@ -31,7 +31,7 @@ class ControllerAction < ApplicationRecord
     permission_id || controller.permission_id
   end
 
-  def name
+  def fullname
     if site_controller_id && (site_controller_id > 0)
       "#{controller.name}: #{name}"
     else
