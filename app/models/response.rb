@@ -253,7 +253,7 @@ class Response < ApplicationRecord
 
   def construct_instructor_html(identifier, self_id, count)
     identifier += '<h4><B>Review ' + count.to_s + '</B></h4>'
-    identifier += '<B>Reviewer: </B>' + map.reviewer.name + ' (' + map.reviewer.name + ')'
+    identifier += '<B>Reviewer: </B>' + map.reviewer.fullname + ' (' + map.reviewer.name + ')'
     identifier + '&nbsp;&nbsp;&nbsp;<a href="#" name= "review_' + self_id + 'Link" onClick="toggleElement(' \
            "'review_" + self_id + "','review'" + ');return false;">hide review</a><BR/>'
   end
