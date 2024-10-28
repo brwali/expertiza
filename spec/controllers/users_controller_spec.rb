@@ -396,7 +396,7 @@ describe UsersController do
   context '#paginate_list' do
     before do
       # Seed the database with a number of users for pagination tests
-      create_list(:student, 120)
+      FactoryBot.create_list(:test_user, 90)
     end
 
     it 'displays 25 users per page when per_page is 25' do
