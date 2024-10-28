@@ -396,9 +396,9 @@ describe UsersController do
   context '#paginate_list' do
     before do
       # Seed the database with a number of users for pagination tests
-      create_list(:user, 120)
+      create_list(:student, 120)
     end
-    
+
     it 'displays 25 users per page when per_page is 25' do
       get :paginate_list, params: { per_page: '1' }
       expect(assigns(:users).length).to eq(25)
