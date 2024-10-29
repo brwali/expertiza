@@ -396,27 +396,27 @@ describe UsersController do
   context '#paginate_list' do
     before do
       # Seed the database with a number of users for pagination tests
-      FactoryBot.create_list(:test_user, 90)
+      FactoryBot.create_list(:test_user, 110)
     end
 
     it 'displays 25 users per page when per_page is 25' do
-      get :paginate_list, params: { per_page: '1' }
-      expect(assigns(:users).length).to eq(25)
+      get :list, params: { per_page: '1' }
+      expect(assigns(:paginated_users).length).to eq(25)
     end
 
     it 'displays 50 users per page when per_page is 50' do
-      get :paginate_list, params: { per_page: '2' }
-      expect(assigns(:users).length).to eq(50)
+      get :list, params: { per_page: '2' }
+      expect(assigns(:paginated_users).length).to eq(50)
     end
 
     it 'displays 100 users per page when per_page is 100' do
-      get :paginate_list, params: { per_page: '3' }
-      expect(assigns(:users).length).to eq(100)
+      get :list, params: { per_page: '3' }
+      expect(assigns(:paginated_users).length).to eq(100)
     end
 
     it 'displays all users on a single page when per_page is "all"' do
-      get :paginate_list, params: { per_page: '4' }
-      expect(assigns(:users).length).to eq(User.count)
+      get :list, params: { per_page: '4' }
+      expect(assigns(:paginated_users).length).to eq(110)
     end
   end
 end
