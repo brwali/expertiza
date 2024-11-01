@@ -13,9 +13,9 @@
 ActiveRecord::Schema.define(version: 20241009142307) do
 
   create_table "account_requests", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.string "username"
-    t.integer "role_id"
     t.string "name"
+    t.integer "role_id"
+    t.string "fullname"
     t.string "institution_id"
     t.string "email"
     t.string "status"
@@ -973,11 +973,11 @@ ActiveRecord::Schema.define(version: 20241009142307) do
   end
 
   create_table "users", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3" do |t|
-    t.string "username", default: "", null: false
+    t.string "name", default: "", null: false
     t.string "crypted_password", limit: 40, default: "", null: false
     t.integer "role_id", default: 0, null: false
     t.string "password_salt"
-    t.string "name"
+    t.string "fullname"
     t.string "email"
     t.integer "parent_id"
     t.boolean "private_by_default", default: false
