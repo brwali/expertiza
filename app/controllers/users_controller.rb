@@ -63,6 +63,7 @@ class UsersController < ApplicationController
   def list
     letter = params[:letter]
     search_by = params[:search_by]
+    @pagination_options = pagination_options
     # If search parameters present
     if letter.present? && search_by.present?
       case search_by.to_i
@@ -259,7 +260,6 @@ class UsersController < ApplicationController
   # For filtering the users list with proper search and pagination.
   def paginate_list
     paginate_options = pagination_options
-
     # If the above hash does not have a value for the key,
     # it means that we need to show all the users on the page
     #

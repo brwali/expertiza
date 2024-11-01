@@ -1,19 +1,20 @@
 <h1>Manage users</h1>
 
 <br/>
-<%= form_tag :action => 'list', method: :get, id: 'pagination_form' do %>
-  <%= label_tag :letter, 'Search users: ' %><%= text_field_tag(:letter, params[:letter]) %>
+<%= form_tag :action => 'show_if_authorized' do %>
+  View user - enter exact login: <%= text_field_with_auto_complete :user, :username, {:size => 41} %>
+<input type='submit' value='Edit'/>
+<% end %>
+
+<%= form_tag :action => 'list' do %>
+  <%= label_tag :letter, 'Search users: ' %>
+  <%= text_field_tag(:letter, params[:letter]) %>
   <%= select_tag(:search_by, options_for_select([['Username', 1], ['Full name', 2], ['Email', 3]])) %>
   <%= submit_tag("Search") %>
 
-  <br/><br/>
-  <label for="per_page">Users per page:</label>
-  <%= select_tag(:per_page, options_for_select(
-      [['25 users', '1'], ['50 users', '2'], ['100 users', '3'], ['All users', '4']], 
-      selected: @per_page
-    ), 
-    onchange: "document.getElementById('pagination_form').submit();"
-  ) %>
+  <%= label_tag :per_page, 'Users per page: ' %>
+  <%= select_tag(:per_page, options_for_select(@pagination_options, selected: params[:per_page] || '3')) %>
+  <%= submit_tag("Apply", name: nil) %>
 <% end %>
 
 <div class="exp">
