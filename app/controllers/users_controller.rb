@@ -271,7 +271,7 @@ class UsersController < ApplicationController
 
     # Sets the number of users to display per page based on the 'per_page' parameter from the request.
     # If no 'per_page' parameter is provided, it defaults to '4', which corresponds to displaying all users on one page.
-    @per_page = params[:per_page] || '3'
+    @per_page = '3'
 
     # search for corresponding users
     # users = User.search_users(role, user_id, letter, @search_by)
