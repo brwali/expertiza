@@ -12,9 +12,8 @@
   <%= select_tag(:search_by, options_for_select([['Username', 1], ['Full name', 2], ['Email', 3]])) %>
   <%= submit_tag("Search") %>
 
-  <%= label_tag :per_page, 'Users per page: ' %>
-  <%= select_tag(:per_page, options_for_select(@pagination_options, selected: params[:per_page] || '3')) %>
-  <%= submit_tag("Apply", name: nil) %>
+<%= label_tag :per_page, 'Users per page: ' %>
+  <%= select_tag(:per_page, options_for_select(@pagination_options, selected: params[:per_page]), onchange: 'this.form.submit()') %>
 <% end %>
 
 <div class="exp">
