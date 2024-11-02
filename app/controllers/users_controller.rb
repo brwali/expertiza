@@ -249,12 +249,12 @@ class UsersController < ApplicationController
   end
 
   def pagination_options
-    {
-      '1' => 25,
-      '2' => 50,
-      '3' => 100,
-      '4' => User.count
-    }
+    [
+      ['25', 25],
+      ['50', 50],
+      ['100', 100],
+      ['All', User.count]
+    ]
   end
 
   # For filtering the users list with proper search and pagination.
@@ -270,8 +270,8 @@ class UsersController < ApplicationController
     @search_by = params[:search_by]
 
     # Sets the number of users to display per page based on the 'per_page' parameter from the request.
-    # If no 'per_page' parameter is provided, it defaults to '3', which corresponds to displaying all users on one page.
-    @per_page = params[:per_page] || '3'
+    # If no 'per_page' parameter is provided, it defaults to '2', which corresponds to displaying 50 users on one page.
+    @per_page = params[:per_page] || '2'
 
     # search for corresponding users
     # users = User.search_users(role, user_id, letter, @search_by)
