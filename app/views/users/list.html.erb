@@ -13,7 +13,7 @@
   <%= submit_tag("Search") %>
 
 <%= label_tag :per_page, 'Users per page: ' %>
-  <%= select_tag(:per_page, options_for_select(@pagination_options, selected: params[:per_page] || '25'), onchange: 'this.form.submit()') %>
+  <%= select_tag(:per_page, options_for_select(@pagination_options, selected: params[:per_page] || 25), onchange: 'this.form.submit()') %>
 <% end %>
 
 <div class="exp">
